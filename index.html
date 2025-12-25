@@ -875,8 +875,8 @@
             });
 
             // Resetar cartas sorteadas ao mudar nível? 
-            // O comportamento original limpava. Vou manter.
-            drawnCards.clear();
+            // FIX: Removido para manter histórico e evitar repetição de cartas já vistas em níveis anteriores (acumulativo)
+            // drawnCards.clear();
             updateTempInfo();
 
             console.log(`[VIRA SYSTEM] Temperatura alterada para: ${temp}`);
