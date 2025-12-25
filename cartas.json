@@ -1,56 +1,450 @@
 [
-  { "id": 1, "temp": 1, "slug": "carta-01", "name": "Desafio 1", "image": "cartas/Final.VIRA_page-0001.jpg" },
-  { "id": 2, "temp": 1, "slug": "carta-02", "name": "Desafio 2", "image": "cartas/Final.VIRA_page-0002.jpg" },
-  { "id": 3, "temp": 1, "slug": "carta-03", "name": "Desafio 3", "image": "cartas/Final.VIRA_page-0003.jpg" },
-  { "id": 4, "temp": 1, "slug": "carta-04", "name": "Desafio 4", "image": "cartas/Final.VIRA_page-0004.jpg" },
-  { "id": 5, "temp": 1, "slug": "carta-05", "name": "Desafio 5", "image": "cartas/Final.VIRA_page-0005.jpg" },
-  { "id": 6, "temp": 2, "slug": "carta-06", "name": "Desafio 6", "image": "cartas/Final.VIRA_page-0006.jpg" },
-  { "id": 7, "temp": 2, "slug": "carta-07", "name": "Desafio 7", "image": "cartas/Final.VIRA_page-0007.jpg" },
-  { "id": 8, "temp": 2, "slug": "carta-08", "name": "Desafio 8", "image": "cartas/Final.VIRA_page-0008.jpg" },
-  { "id": 9, "temp": 2, "slug": "carta-09", "name": "Desafio 9", "image": "cartas/Final.VIRA_page-0009.jpg" },
-  { "id": 10, "temp": 2, "slug": "carta-10", "name": "Desafio 10", "image": "cartas/Final.VIRA_page-0010.jpg" },
-  { "id": 11, "temp": 3, "slug": "carta-11", "name": "Desafio 11", "image": "cartas/Final.VIRA_page-0011.jpg" },
-  { "id": 12, "temp": 3, "slug": "carta-12", "name": "Desafio 12", "image": "cartas/Final.VIRA_page-0012.jpg" },
-  { "id": 13, "temp": 3, "slug": "carta-13", "name": "Desafio 13", "image": "cartas/Final.VIRA_page-0013.jpg" },
-  { "id": 14, "temp": 3, "slug": "carta-14", "name": "Desafio 14", "image": "cartas/Final.VIRA_page-0014.jpg" },
-  { "id": 15, "temp": 3, "slug": "carta-15", "name": "Desafio 15", "image": "cartas/Final.VIRA_page-0015.jpg" },
-  { "id": 16, "temp": 4, "slug": "carta-16", "name": "Desafio 16", "image": "cartas/Final.VIRA_page-0016.jpg" },
-  { "id": 17, "temp": 4, "slug": "carta-17", "name": "Desafio 17", "image": "cartas/Final.VIRA_page-0017.jpg" },
-  { "id": 18, "temp": 4, "slug": "carta-18", "name": "Desafio 18", "image": "cartas/Final.VIRA_page-0018.jpg" },
-  { "id": 19, "temp": 4, "slug": "carta-19", "name": "Desafio 19", "image": "cartas/Final.VIRA_page-0019.jpg" },
-  { "id": 20, "temp": 4, "slug": "carta-20", "name": "Desafio 20", "image": "cartas/Final.VIRA_page-0020.jpg" },
-  { "id": 21, "temp": 5, "slug": "carta-21", "name": "Desafio 21", "image": "cartas/Final.VIRA_page-0021.jpg" },
-  { "id": 22, "temp": 5, "slug": "carta-22", "name": "Desafio 22", "image": "cartas/Final.VIRA_page-0022.jpg" },
-  { "id": 23, "temp": 5, "slug": "carta-23", "name": "Desafio 23", "image": "cartas/Final.VIRA_page-0023.jpg" },
-  { "id": 24, "temp": 5, "slug": "carta-24", "name": "Desafio 24", "image": "cartas/Final.VIRA_page-0024.jpg" },
-  { "id": 25, "temp": 5, "slug": "carta-25", "name": "Desafio 25", "image": "cartas/Final.VIRA_page-0025.jpg" },
-  { "id": 26, "temp": 6, "slug": "carta-26", "name": "Desafio 26", "image": "cartas/Final.VIRA_page-0026.jpg" },
-  { "id": 27, "temp": 6, "slug": "carta-27", "name": "Desafio 27", "image": "cartas/Final.VIRA_page-0027.jpg" },
-  { "id": 28, "temp": 6, "slug": "carta-28", "name": "Desafio 28", "image": "cartas/Final.VIRA_page-0028.jpg" },
-  { "id": 29, "temp": 6, "slug": "carta-29", "name": "Desafio 29", "image": "cartas/Final.VIRA_page-0029.jpg" },
-  { "id": 30, "temp": 6, "slug": "carta-30", "name": "Desafio 30", "image": "cartas/Final.VIRA_page-0030.jpg" },
-  { "id": 31, "temp": 7, "slug": "carta-31", "name": "Desafio 31", "image": "cartas/Final.VIRA_page-0031.jpg" },
-  { "id": 32, "temp": 7, "slug": "carta-32", "name": "Desafio 32", "image": "cartas/Final.VIRA_page-0032.jpg" },
-  { "id": 33, "temp": 7, "slug": "carta-33", "name": "Desafio 33", "image": "cartas/Final.VIRA_page-0033.jpg" },
-  { "id": 34, "temp": 7, "slug": "carta-34", "name": "Desafio 34", "image": "cartas/Final.VIRA_page-0034.jpg" },
-  { "id": 35, "temp": 7, "slug": "carta-35", "name": "Desafio 35", "image": "cartas/Final.VIRA_page-0035.jpg" },
-  { "id": 36, "temp": 8, "slug": "carta-36", "name": "Desafio 36", "image": "cartas/Final.VIRA_page-0036.jpg" },
-  { "id": 37, "temp": 8, "slug": "carta-37", "name": "Desafio 37", "image": "cartas/Final.VIRA_page-0037.jpg" },
-  { "id": 38, "temp": 8, "slug": "carta-38", "name": "Desafio 38", "image": "cartas/Final.VIRA_page-0038.jpg" },
-  { "id": 39, "temp": 8, "slug": "carta-39", "name": "Desafio 39", "image": "cartas/Final.VIRA_page-0039.jpg" },
-  { "id": 40, "temp": 8, "slug": "carta-40", "name": "Desafio 40", "image": "cartas/Final.VIRA_page-0040.jpg" },
-  { "id": 41, "temp": 9, "slug": "carta-41", "name": "Desafio 41", "image": "cartas/Final.VIRA_page-0041.jpg" },
-  { "id": 42, "temp": 9, "slug": "carta-42", "name": "Desafio 42", "image": "cartas/Final.VIRA_page-0042.jpg" },
-  { "id": 43, "temp": 9, "slug": "carta-43", "name": "Desafio 43", "image": "cartas/Final.VIRA_page-0043.jpg" },
-  { "id": 44, "temp": 9, "slug": "carta-44", "name": "Desafio 44", "image": "cartas/Final.VIRA_page-0044.jpg" },
-  { "id": 45, "temp": 9, "slug": "carta-45", "name": "Desafio 45", "image": "cartas/Final.VIRA_page-0045.jpg" },
-  { "id": 46, "temp": 9, "slug": "carta-46", "name": "Desafio 46", "image": "cartas/Final.VIRA_page-0046.jpg" },
-  { "id": 47, "temp": 9, "slug": "carta-47", "name": "Desafio 47", "image": "cartas/Final.VIRA_page-0047.jpg" },
-  { "id": 48, "temp": 10, "slug": "carta-48", "name": "Desafio 48", "image": "cartas/Final.VIRA_page-0048.jpg" },
-  { "id": 49, "temp": 10, "slug": "carta-49", "name": "Desafio 49", "image": "cartas/Final.VIRA_page-0049.jpg" },
-  { "id": 50, "temp": 10, "slug": "carta-50", "name": "Desafio 50", "image": "cartas/Final.VIRA_page-0050.jpg" },
-  { "id": 51, "temp": 10, "slug": "carta-51", "name": "Desafio 51", "image": "cartas/Final.VIRA_page-0051.jpg" },
-  { "id": 52, "temp": 10, "slug": "carta-52", "name": "Desafio 52", "image": "cartas/Final.VIRA_page-0052.jpg" },
-  { "id": 53, "temp": 10, "slug": "carta-53", "name": "Desafio 53", "image": "cartas/Final.VIRA_page-0053.jpg" },
-  { "id": 54, "temp": 10, "slug": "carta-54", "name": "Desafio 54", "image": "cartas/Final.VIRA_page-0054.jpg" }
+  {
+    "id": 1,
+    "temp": 4,
+    "slug": "carta-01",
+    "name": "Batalha de Flexão",
+    "image": "cartas/Final.VIRA_page-0001.jpg"
+  },
+  {
+    "id": 2,
+    "temp": 5,
+    "slug": "carta-02",
+    "name": "Troque de Roupa",
+    "image": "cartas/Final.VIRA_page-0002.jpg"
+  },
+  {
+    "id": 3,
+    "temp": 6,
+    "slug": "carta-03",
+    "name": "Diga",
+    "image": "cartas/Final.VIRA_page-0003.jpg"
+  },
+  {
+    "id": 4,
+    "temp": 7,
+    "slug": "carta-04",
+    "name": "Body Count",
+    "image": "cartas/Final.VIRA_page-0004.jpg"
+  },
+  {
+    "id": 5,
+    "temp": 8,
+    "slug": "carta-05",
+    "name": "Beijo Vendado",
+    "image": "cartas/Final.VIRA_page-0005.jpg"
+  },
+  {
+    "id": 6,
+    "temp": 9,
+    "slug": "carta-06",
+    "name": "Body Shot",
+    "image": "cartas/Final.VIRA_page-0006.jpg"
+  },
+  {
+    "id": 7,
+    "temp": 10,
+    "slug": "carta-07",
+    "name": "Lapdance",
+    "image": "cartas/Final.VIRA_page-0007.jpg"
+  },
+  {
+    "id": 8,
+    "temp": 1,
+    "slug": "carta-08",
+    "name": "Crie uma Regra",
+    "image": "cartas/Final.VIRA_page-0008.jpg"
+  },
+  {
+    "id": 9,
+    "temp": 1,
+    "slug": "carta-09",
+    "name": "Copo na Mão",
+    "image": "cartas/Final.VIRA_page-0009.jpg"
+  },
+  {
+    "id": 10,
+    "temp": 1,
+    "slug": "carta-10",
+    "name": "Vira",
+    "image": "cartas/Final.VIRA_page-0010.jpg"
+  },
+  {
+    "id": 11,
+    "temp": 1,
+    "slug": "carta-11",
+    "name": "Vira 3",
+    "image": "cartas/Final.VIRA_page-0011.jpg"
+  },
+  {
+    "id": 12,
+    "temp": 1,
+    "slug": "carta-12",
+    "name": "Ligação",
+    "image": "cartas/Final.VIRA_page-0012.jpg"
+  },
+  {
+    "id": 13,
+    "temp": 1,
+    "slug": "carta-13",
+    "name": "Continência",
+    "image": "cartas/Final.VIRA_page-0013.jpg"
+  },
+  {
+    "id": 14,
+    "temp": 1,
+    "slug": "carta-14",
+    "name": "Embaralhe",
+    "image": "cartas/Final.VIRA_page-0014.jpg"
+  },
+  {
+    "id": 15,
+    "temp": 2,
+    "slug": "carta-15",
+    "name": "Jogo do Sério",
+    "image": "cartas/Final.VIRA_page-0015.jpg"
+  },
+  {
+    "id": 16,
+    "temp": 3,
+    "slug": "carta-16",
+    "name": "Top 3",
+    "image": "cartas/Final.VIRA_page-0016.jpg"
+  },
+  {
+    "id": 17,
+    "temp": 4,
+    "slug": "carta-17",
+    "name": "Stories",
+    "image": "cartas/Final.VIRA_page-0017.jpg"
+  },
+  {
+    "id": 18,
+    "temp": 5,
+    "slug": "carta-18",
+    "name": "Desafio",
+    "image": "cartas/Final.VIRA_page-0018.jpg"
+  },
+  {
+    "id": 19,
+    "temp": 6,
+    "slug": "carta-19",
+    "name": "Paranoia",
+    "image": "cartas/Final.VIRA_page-0019.jpg"
+  },
+  {
+    "id": 20,
+    "temp": 7,
+    "slug": "carta-20",
+    "name": "Marca de Batom",
+    "image": "cartas/Final.VIRA_page-0020.jpg"
+  },
+  {
+    "id": 11,
+    "temp": 1,
+    "slug": "carta-11",
+    "name": "Carta da Dupla",
+    "image": "cartas/Final.VIRA_page-0011.jpg"
+  },
+  {
+    "id": 12,
+    "temp": 2,
+    "slug": "carta-12",
+    "name": "Make-up ou Tattoo",
+    "image": "cartas/Final.VIRA_page-0012.jpg"
+  },
+  {
+    "id": 13,
+    "temp": 3,
+    "slug": "carta-13",
+    "name": "Passe o Gelo",
+    "image": "cartas/Final.VIRA_page-0013.jpg"
+  },
+  {
+    "id": 14,
+    "temp": 4,
+    "slug": "carta-14",
+    "name": "Pênis Time",
+    "image": "cartas/Final.VIRA_page-0014.jpg"
+  },
+  {
+    "id": 15,
+    "temp": 5,
+    "slug": "carta-15",
+    "name": "Quem é Mais Provável?",
+    "image": "cartas/Final.VIRA_page-0015.jpg"
+  },
+  {
+    "id": 16,
+    "temp": 6,
+    "slug": "carta-16",
+    "name": "Eu Nunca",
+    "image": "cartas/Final.VIRA_page-0016.jpg"
+  },
+  {
+    "id": 17,
+    "temp": 7,
+    "slug": "carta-17",
+    "name": "Massagem",
+    "image": "cartas/Final.VIRA_page-0017.jpg"
+  },
+  {
+    "id": 18,
+    "temp": 8,
+    "slug": "carta-18",
+    "name": "7 Minutos no Céu",
+    "image": "cartas/Final.VIRA_page-0018.jpg"
+  },
+  {
+    "id": 19,
+    "temp": 9,
+    "slug": "carta-19",
+    "name": "Cadeira",
+    "image": "cartas/Final.VIRA_page-0019.jpg"
+  },
+  {
+    "id": 20,
+    "temp": 10,
+    "slug": "carta-20",
+    "name": "Parceiro",
+    "image": "cartas/Final.VIRA_page-0020.jpg"
+  },
+  {
+    "id": 21,
+    "temp": 1,
+    "slug": "carta-21",
+    "name": "Vira 3",
+    "image": "cartas/Final.VIRA_page-0021.jpg"
+  },
+  {
+    "id": 22,
+    "temp": 1,
+    "slug": "carta-22",
+    "name": "Ligação",
+    "image": "cartas/Final.VIRA_page-0022.jpg"
+  },
+  {
+    "id": 23,
+    "temp": 1,
+    "slug": "carta-23",
+    "name": "Continência",
+    "image": "cartas/Final.VIRA_page-0023.jpg"
+  },
+  {
+    "id": 24,
+    "temp": 1,
+    "slug": "carta-24",
+    "name": "Embaralhe",
+    "image": "cartas/Final.VIRA_page-0024.jpg"
+  },
+  {
+    "id": 25,
+    "temp": 2,
+    "slug": "carta-25",
+    "name": "Jogo do Sério",
+    "image": "cartas/Final.VIRA_page-0025.jpg"
+  },
+  {
+    "id": 26,
+    "temp": 3,
+    "slug": "carta-26",
+    "name": "Top 3",
+    "image": "cartas/Final.VIRA_page-0026.jpg"
+  },
+  {
+    "id": 27,
+    "temp": 4,
+    "slug": "carta-27",
+    "name": "Stories",
+    "image": "cartas/Final.VIRA_page-0027.jpg"
+  },
+  {
+    "id": 28,
+    "temp": 5,
+    "slug": "carta-28",
+    "name": "Desafio",
+    "image": "cartas/Final.VIRA_page-0028.jpg"
+  },
+  {
+    "id": 29,
+    "temp": 6,
+    "slug": "carta-29",
+    "name": "Paranoia",
+    "image": "cartas/Final.VIRA_page-0029.jpg"
+  },
+  {
+    "id": 30,
+    "temp": 7,
+    "slug": "carta-30",
+    "name": "Marca de Batom",
+    "image": "cartas/Final.VIRA_page-0030.jpg"
+  },
+  {
+    "id": 31,
+    "temp": 8,
+    "slug": "carta-31",
+    "name": "Arrepio",
+    "image": "cartas/Final.VIRA_page-0031.jpg"
+  },
+  {
+    "id": 32,
+    "temp": 9,
+    "slug": "carta-32",
+    "name": "Provocar",
+    "image": "cartas/Final.VIRA_page-0032.jpg"
+  },
+  {
+    "id": 33,
+    "temp": 10,
+    "slug": "carta-33",
+    "name": "Tapa",
+    "image": "cartas/Final.VIRA_page-0033.jpg"
+  },
+  {
+    "id": 34,
+    "temp": 1,
+    "slug": "carta-34",
+    "name": "Touch",
+    "image": "cartas/Final.VIRA_page-0034.jpg"
+  },
+  {
+    "id": 35,
+    "temp": 1,
+    "slug": "carta-35",
+    "name": "Beijo",
+    "image": "cartas/Final.VIRA_page-0035.jpg"
+  },
+  {
+    "id": 36,
+    "temp": 1,
+    "slug": "carta-36",
+    "name": "Vira!",
+    "image": "cartas/Final.VIRA_page-0036.jpg"
+  },
+  {
+    "id": 37,
+    "temp": 1,
+    "slug": "carta-37",
+    "name": "Efeito Total",
+    "image": "cartas/Final.VIRA_page-0037.jpg"
+  },
+  {
+    "id": 38,
+    "temp": 2,
+    "slug": "carta-38",
+    "name": "Buffalo Bill",
+    "image": "cartas/Final.VIRA_page-0038.jpg"
+  },
+  {
+    "id": 39,
+    "temp": 3,
+    "slug": "carta-39",
+    "name": "Perfume",
+    "image": "cartas/Final.VIRA_page-0039.jpg"
+  },
+  {
+    "id": 40,
+    "temp": 4,
+    "slug": "carta-40",
+    "name": "Segredos",
+    "image": "cartas/Final.VIRA_page-0040.jpg"
+  },
+  {
+    "id": 41,
+    "temp": 5,
+    "slug": "carta-41",
+    "name": "Verdade",
+    "image": "cartas/Final.VIRA_page-0041.jpg"
+  },
+  {
+    "id": 42,
+    "temp": 6,
+    "slug": "carta-42",
+    "name": "Vira!",
+    "image": "cartas/Final.VIRA_page-0042.jpg"
+  },
+  {
+    "id": 43,
+    "temp": 7,
+    "slug": "carta-43",
+    "name": "Suck and Blow",
+    "image": "cartas/Final.VIRA_page-0043.jpg"
+  },
+  {
+    "id": 44,
+    "temp": 8,
+    "slug": "carta-44",
+    "name": "Beijo Vendado",
+    "image": "cartas/Final.VIRA_page-0044.jpg"
+  },
+  {
+    "id": 45,
+    "temp": 9,
+    "slug": "carta-45",
+    "name": "Vira!",
+    "image": "cartas/Final.VIRA_page-0045.jpg"
+  },
+  {
+    "id": 46,
+    "temp": 10,
+    "slug": "carta-46",
+    "name": "Tire uma Peça de Roupa",
+    "image": "cartas/Final.VIRA_page-0046.jpg"
+  },
+  {
+    "id": 47,
+    "temp": 1,
+    "slug": "carta-47",
+    "name": "Brinde",
+    "image": "cartas/Final.VIRA_page-0047.jpg"
+  },
+  {
+    "id": 48,
+    "temp": 1,
+    "slug": "carta-48",
+    "name": "Carta do Dobro",
+    "image": "cartas/Final.VIRA_page-0048.jpg"
+  },
+  {
+    "id": 49,
+    "temp": 2,
+    "slug": "carta-49",
+    "name": "Não",
+    "image": "cartas/Final.VIRA_page-0049.jpg"
+  },
+  {
+    "id": 50,
+    "temp": 3,
+    "slug": "carta-50",
+    "name": "Qual a Probabilidade",
+    "image": "cartas/Final.VIRA_page-0050.jpg"
+  }
+  {
+    "id": 51,
+    "temp": 1,
+    "slug": "carta-51",
+    "name": "Crie uma Regra",
+    "image": "cartas/Final.VIRA_page-0051.jpg"
+  },
+  {
+    "id": 52,
+    "temp": 1,
+    "slug": "carta-52",
+    "name": "Lugar Inusitado",
+    "image": "cartas/Final.VIRA_page-0052.jpg"
+  },
+  {
+    "id": 53,
+    "temp": 1,
+    "slug": "carta-53",
+    "name": "Joker",
+    "image": "cartas/Final.VIRA_page-0053.jpg"
+  },
+  {
+    "id": 54,
+    "temp": 1,
+    "slug": "carta-54",
+    "name": "Joker",
+    "image": "cartas/Final.VIRA_page-0054.jpg"
+  }
 ]
