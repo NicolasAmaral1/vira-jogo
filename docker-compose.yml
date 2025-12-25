@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  vira-game:
+    build: .
+    container_name: vira-game
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    volumes:
+      # Montar pasta de cartas para facilitar atualização sem rebuild
+      - ./cartas:/usr/share/nginx/html/cartas:ro
+    networks:
+      - vira-network
+
+networks:
+  vira-network:
+    driver: bridge

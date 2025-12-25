@@ -1,0 +1,9 @@
+# Ignorar arquivos desnecessários no build
+.git
+.gitignore
+README.md
+GUIA-v2.md
+*.md
+.DS_Store
+node_modules
+*.log
