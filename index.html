@@ -278,7 +278,7 @@
         /* Responsividade básica */
         @media (max-width: 1000px) {
             .main-layout {
-                flex-direction: column-reverse;
+                flex-direction: column;
             }
 
             .sidebar {
@@ -289,32 +289,42 @@
                 gap: 1rem;
                 padding: 1rem;
                 border-right: none;
-                border-top: 1px solid var(--border-color);
-            }
-
-            .header,
-            .controls,
-            .thermometer-wrapper {
-                margin: 0;
+                border-bottom: 1px solid var(--border-color);
+                justify-content: space-between;
+                flex-wrap: wrap;
             }
 
             .header {
+                margin: 0;
                 text-align: left;
+                flex: 1;
             }
 
             h1 {
                 font-size: 2rem;
+                margin: 0;
+            }
+
+            .subtitle {
+                display: none;
+            }
+
+            .thermometer-wrapper {
+                margin: 0;
+                order: 2;
+                flex: 2;
+                justify-content: flex-end;
             }
 
             .thermometer-container {
                 flex-direction: row;
-                /* Horizontal em telas pequenas */
                 height: auto;
+                padding: 5px;
             }
 
             .temp-level {
-                width: 30px;
-                height: 30px;
+                width: 25px;
+                height: 25px;
             }
 
             .temp-level::before {
@@ -326,6 +336,64 @@
             .temp-level.active::before {
                 width: 100%;
                 height: 100%;
+            }
+
+            .temp-level span {
+                font-size: 0.7rem;
+            }
+
+            /* CONTROLES / RODAPÉ MÓVEL */
+            .controls {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: var(--sidebar-bg);
+                /* Fundo sólido para cobrir conteúdo */
+                padding: 1rem;
+                border-top: 1px solid var(--border-color);
+                z-index: 100;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(10px);
+                /* Efeito vidro se o fundo suportar */
+            }
+
+            /* Esconder temp-info nos controles mobile se desejar simplificar, ou ajustar */
+            .controls .temp-info {
+                display: none;
+                /* Simplificando para dar foco no botão */
+            }
+
+            .draw-button {
+                width: 100%;
+                padding: 1.5rem;
+                /* Botão bem grande */
+                font-size: 1.3rem;
+                border-radius: 12px;
+                margin: 0;
+            }
+
+            /* ÁREA DE CONTEÚDO */
+            .content-area {
+                padding: 1rem;
+                padding-bottom: 120px;
+                /* Espaço para o botão fixo não cobrir a carta */
+                align-items: flex-start;
+                /* Carta mais pro topo */
+                padding-top: 2rem;
+            }
+
+            .card-wrapper {
+                max-height: 70vh;
+                /* Menor em mobile */
+                width: 90%;
+            }
+
+            .card-placeholder {
+                font-size: 1rem;
             }
         }
     </style>
