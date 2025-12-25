@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VIRA - Jogo de Desafios</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@700&display=swap"
+        rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #050505;
+            --sidebar-bg: #0f0f0f;
+            --accent-color: #a855f7;
+            --accent-glow: rgba(168, 85, 247, 0.4);
+            --text-color: #e0e0e0;
+            --border-color: #2a2a2a;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,148 +26,164 @@
 
         body {
             font-family: 'JetBrains Mono', monospace;
-            background: #0a0a0a;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #e0e0e0;
-            padding: 20px;
+            background: var(--bg-color);
+            height: 100vh;
+            color: var(--text-color);
+            overflow: hidden;
+            /* Garante tela única sem scroll */
         }
 
-        .container {
-            max-width: 800px;
+        /* Layout Principal Grid/Flex */
+        .main-layout {
+            display: flex;
+            height: 100%;
             width: 100%;
+        }
+
+        /* ----- SIDEBAR (Controles e Termômetro) ----- */
+        .sidebar {
+            width: 380px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
         }
 
         h1 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 5rem;
-            text-align: center;
-            margin-bottom: 10px;
-            letter-spacing: 12px;
-            color: #a855f7;
-            text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+            font-size: 4rem;
+            color: var(--accent-color);
+            text-shadow: 0 0 15px var(--accent-glow);
+            letter-spacing: 0.5rem;
+            line-height: 1;
+            margin-bottom: 0.5rem;
         }
 
         .subtitle {
-            text-align: center;
-            font-size: 0.9rem;
-            margin-bottom: 60px;
+            font-size: 0.8rem;
+            letter-spacing: 0.2rem;
             opacity: 0.5;
-            letter-spacing: 4px;
-        }
-
-        .game-area {
-            background: #1a1a1a;
-            border-radius: 20px;
-            padding: 40px;
-            border: 1px solid #2a2a2a;
-        }
-
-        .thermometer-section {
-            margin-bottom: 40px;
-        }
-
-        .thermometer-label {
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-            text-align: center;
-            letter-spacing: 2px;
-            opacity: 0.6;
             text-transform: uppercase;
+        }
+
+        /* Container do Termômetro Centralizado na Sidebar */
+        .thermometer-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem 0;
         }
 
         .thermometer-container {
             display: flex;
-            gap: 6px;
-            justify-content: center;
-            margin-bottom: 20px;
+            flex-direction: column-reverse;
+            /* Cresce de baixo para cima */
+            gap: 4px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
         }
 
         .temp-level {
-            width: 50px;
-            height: 160px;
-            background: #0f0f0f;
-            border-radius: 8px;
+            width: 60px;
+            height: 40px;
+            background: #1a1a1a;
+            border-radius: 4px;
             cursor: pointer;
             position: relative;
             transition: all 0.2s ease;
-            border: 1px solid #2a2a2a;
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
-            padding-bottom: 8px;
-            overflow: hidden;
+            border: 1px solid transparent;
         }
 
+        /* Efeito de preenchimento */
         .temp-level::before {
             content: '';
             position: absolute;
-            bottom: 0;
             left: 0;
-            right: 0;
-            height: 0%;
-            background: linear-gradient(to top, #7c3aed, #a855f7);
-            transition: height 0.3s ease;
+            top: 0;
+            bottom: 0;
+            width: 0%;
+            background: var(--accent-color);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            opacity: 0.8;
+            z-index: 0;
         }
 
         .temp-level.active::before {
-            height: 100%;
+            width: 100%;
+            box-shadow: 0 0 10px var(--accent-glow);
         }
 
         .temp-level:hover {
-            border-color: #a855f7;
+            border-color: var(--accent-color);
         }
 
         .temp-level span {
             position: relative;
             z-index: 2;
             font-weight: 700;
-            font-size: 1.1rem;
-            opacity: 0.7;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.3);
+            transition: color 0.3s;
         }
 
         .temp-level.active span {
-            opacity: 1;
+            color: #fff;
+        }
+
+        .controls {
+            margin-top: auto;
         }
 
         .temp-info {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
             text-align: center;
             font-size: 0.9rem;
-            margin-top: 20px;
-            padding: 15px;
-            background: #0f0f0f;
-            border-radius: 10px;
-            border: 1px solid #2a2a2a;
         }
 
         .temp-info strong {
-            color: #a855f7;
-            font-size: 1.2rem;
+            color: var(--accent-color);
+            font-size: 1.1rem;
         }
 
         .draw-button {
-            display: block;
             width: 100%;
-            max-width: 300px;
-            margin: 30px auto;
-            padding: 18px 40px;
-            font-size: 1.1rem;
+            padding: 1.2rem;
             font-family: 'Space Grotesk', sans-serif;
-            letter-spacing: 2px;
-            background: #a855f7;
-            border: none;
-            border-radius: 10px;
-            color: #000;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            font-size: 1.2rem;
             font-weight: 700;
+            letter-spacing: 2px;
+            background: var(--accent-color);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
         .draw-button:hover {
-            background: #9333ea;
             transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--accent-glow);
+            filter: brightness(1.1);
         }
 
         .draw-button:active {
@@ -163,317 +191,384 @@
         }
 
         .draw-button:disabled {
-            opacity: 0.3;
+            opacity: 0.5;
             cursor: not-allowed;
-            transform: none;
+            filter: grayscale(1);
         }
 
-        .card-display {
-            margin-top: 30px;
-            min-height: 500px;
+        /* ----- AREA DA CARTA (Direita) ----- */
+        .content-area {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 2rem;
+            position: relative;
+            background: radial-gradient(circle at center, #111 0%, #050505 100%);
         }
 
         .card-wrapper {
-            transition: transform 0.3s ease;
             position: relative;
-            width: 350px;
-            height: 500px;
-        }
-
-        .card-wrapper.flipping {
-            animation: cardFlip 0.3s ease-in-out;
-        }
-
-        @keyframes cardFlip {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(0.9); opacity: 0.5; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .card {
             width: 100%;
             height: 100%;
-            border-radius: 15px;
-            overflow: hidden;
-            background: #0f0f0f;
+            max-width: 800px;
+            /* Limite lateral */
+            max-height: 90vh;
+            /* Limite vertical para não estourar */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            border: 1px solid #2a2a2a;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card-wrapper.flipping {
+            transform: scale(0.95) rotateY(180deg);
+            opacity: 0;
+        }
+
+        .card {
+            width: auto;
+            height: 100%;
+            max-width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            background: #000;
         }
 
         .card img {
-            max-width: 100%;
-            max-height: 100%;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
+            /* Garante que a carta inteira apareça */
+            display: block;
         }
 
         .card-placeholder {
             width: 100%;
             height: 100%;
-            background: #0f0f0f;
-            border-radius: 15px;
-            border: 2px dashed #2a2a2a;
+            max-width: 500px;
+            aspect-ratio: 3/4;
+            border: 2px dashed var(--border-color);
+            border-radius: 20px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            opacity: 0.3;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 1.5rem;
+            letter-spacing: 0.2rem;
         }
 
-        .card-info {
-            margin-top: 20px;
-            font-size: 0.9rem;
-            text-align: center;
-            color: #a855f7;
-            letter-spacing: 1px;
+        .card-meta {
+            position: absolute;
+            bottom: 1rem;
+            right: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            border: 1px solid var(--border-color);
+            opacity: 0.6;
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 3.5rem;
+        /* Responsividade básica */
+        @media (max-width: 1000px) {
+            .main-layout {
+                flex-direction: column-reverse;
             }
 
-            .game-area {
-                padding: 25px 15px;
+            .sidebar {
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                align-items: center;
+                gap: 1rem;
+                padding: 1rem;
+                border-right: none;
+                border-top: 1px solid var(--border-color);
+            }
+
+            .header,
+            .controls,
+            .thermometer-wrapper {
+                margin: 0;
+            }
+
+            .header {
+                text-align: left;
+            }
+
+            h1 {
+                font-size: 2rem;
             }
 
             .thermometer-container {
-                gap: 3px;
+                flex-direction: row;
+                /* Horizontal em telas pequenas */
+                height: auto;
             }
 
             .temp-level {
-                width: 28px;
-                height: 130px;
+                width: 30px;
+                height: 30px;
             }
 
-            .temp-level span {
-                font-size: 0.85rem;
+            .temp-level::before {
+                width: 0%;
+                height: 0%;
+                top: auto;
             }
 
-            .card-wrapper {
-                width: 280px;
-                height: 400px;
+            .temp-level.active::before {
+                width: 100%;
+                height: 100%;
             }
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>VIRA</h1>
-        <p class="subtitle">JOGO DE DESAFIOS</p>
+    <div class="main-layout">
+        <!-- BARRA LATERAL -->
+        <aside class="sidebar">
+            <header class="header">
+                <h1>VIRA</h1>
+                <p class="subtitle">Jogo de Desafios</p>
+            </header>
 
-        <div class="game-area">
-            <div class="thermometer-section">
-                <div class="thermometer-label">Temperatura</div>
-                <div class="thermometer-container" id="thermometer"></div>
+            <div class="thermometer-wrapper">
+                <!-- Termômetro Vertical -->
+                <div class="thermometer-container" id="thermometer">
+                    <!-- Gerado via JS -->
+                </div>
+            </div>
+
+            <div class="controls">
                 <div class="temp-info">
-                    Nível <strong id="currentTemp">1</strong> | 
-                    <strong id="availableCards">0</strong> cartas
+                    TEMPERATURA <strong id="currentTempDisplay" style="font-size: 1.5rem">1</strong><br>
+                    <span style="opacity: 0.5; font-size: 0.8rem">
+                        <strong id="availableCards">0</strong> CARTAS DISPONÍVEIS
+                    </span>
+                </div>
+                <button class="draw-button" id="drawButton">
+                    SORTEAR CARTA
+                </button>
+            </div>
+        </aside>
+
+        <!-- ÁREA PRINCIPAL -->
+        <main class="content-area">
+            <div class="card-wrapper" id="cardWrapper">
+                <div class="card-placeholder">
+                    <span>AGUARDANDO SORTEIO</span>
                 </div>
             </div>
-
-            <button class="draw-button" id="drawButton">
-                SORTEAR
-            </button>
-
-            <div class="card-display">
-                <div class="card-wrapper" id="cardWrapper">
-                    <div class="card-placeholder">
-                        AGUARDANDO
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-info" id="cardInfo"></div>
-        </div>
+            <div id="cardMeta" class="card-meta" style="display: none;"></div>
+        </main>
     </div>
 
     <script>
-        // ===== CONFIGURAÇÃO DAS CARTAS =====
-        // Formato: Final.VIRA_page-0001.jpg
+        // DADOS DAS CARTAS (Incorporado para funcionar localmente sem servidor)
         const CARDS_CONFIG = [
-            // TEMPERATURA 1 (5 cartas)
-            { id: 1, temp: 1, slug: "carta-01", name: "Desafio 1", image: "cartas/Final.VIRA_page-0001.jpg" },
-            { id: 2, temp: 1, slug: "carta-02", name: "Desafio 2", image: "cartas/Final.VIRA_page-0002.jpg" },
-            { id: 3, temp: 1, slug: "carta-03", name: "Desafio 3", image: "cartas/Final.VIRA_page-0003.jpg" },
-            { id: 4, temp: 1, slug: "carta-04", name: "Desafio 4", image: "cartas/Final.VIRA_page-0004.jpg" },
-            { id: 5, temp: 1, slug: "carta-05", name: "Desafio 5", image: "cartas/Final.VIRA_page-0005.jpg" },
-            
-            // TEMPERATURA 2 (10 cartas - adiciona mais 5)
-            { id: 6, temp: 2, slug: "carta-06", name: "Desafio 6", image: "cartas/Final.VIRA_page-0006.jpg" },
-            { id: 7, temp: 2, slug: "carta-07", name: "Desafio 7", image: "cartas/Final.VIRA_page-0007.jpg" },
-            { id: 8, temp: 2, slug: "carta-08", name: "Desafio 8", image: "cartas/Final.VIRA_page-0008.jpg" },
-            { id: 9, temp: 2, slug: "carta-09", name: "Desafio 9", image: "cartas/Final.VIRA_page-0009.jpg" },
-            { id: 10, temp: 2, slug: "carta-10", name: "Desafio 10", image: "cartas/Final.VIRA_page-0010.jpg" },
-            
-            // TEMPERATURA 3 (15 cartas - adiciona mais 5)
-            { id: 11, temp: 3, slug: "carta-11", name: "Desafio 11", image: "cartas/Final.VIRA_page-0011.jpg" },
-            { id: 12, temp: 3, slug: "carta-12", name: "Desafio 12", image: "cartas/Final.VIRA_page-0012.jpg" },
-            { id: 13, temp: 3, slug: "carta-13", name: "Desafio 13", image: "cartas/Final.VIRA_page-0013.jpg" },
-            { id: 14, temp: 3, slug: "carta-14", name: "Desafio 14", image: "cartas/Final.VIRA_page-0014.jpg" },
-            { id: 15, temp: 3, slug: "carta-15", name: "Desafio 15", image: "cartas/Final.VIRA_page-0015.jpg" },
-            
-            // TEMPERATURA 4 (20 cartas - adiciona mais 5)
-            { id: 16, temp: 4, slug: "carta-16", name: "Desafio 16", image: "cartas/Final.VIRA_page-0016.jpg" },
-            { id: 17, temp: 4, slug: "carta-17", name: "Desafio 17", image: "cartas/Final.VIRA_page-0017.jpg" },
-            { id: 18, temp: 4, slug: "carta-18", name: "Desafio 18", image: "cartas/Final.VIRA_page-0018.jpg" },
-            { id: 19, temp: 4, slug: "carta-19", name: "Desafio 19", image: "cartas/Final.VIRA_page-0019.jpg" },
-            { id: 20, temp: 4, slug: "carta-20", name: "Desafio 20", image: "cartas/Final.VIRA_page-0020.jpg" },
-            
-            // TEMPERATURA 5 (25 cartas - adiciona mais 5)
-            { id: 21, temp: 5, slug: "carta-21", name: "Desafio 21", image: "cartas/Final.VIRA_page-0021.jpg" },
-            { id: 22, temp: 5, slug: "carta-22", name: "Desafio 22", image: "cartas/Final.VIRA_page-0022.jpg" },
-            { id: 23, temp: 5, slug: "carta-23", name: "Desafio 23", image: "cartas/Final.VIRA_page-0023.jpg" },
-            { id: 24, temp: 5, slug: "carta-24", name: "Desafio 24", image: "cartas/Final.VIRA_page-0024.jpg" },
-            { id: 25, temp: 5, slug: "carta-25", name: "Desafio 25", image: "cartas/Final.VIRA_page-0025.jpg" },
-            
-            // TEMPERATURA 6 (30 cartas - adiciona mais 5)
-            { id: 26, temp: 6, slug: "carta-26", name: "Desafio 26", image: "cartas/Final.VIRA_page-0026.jpg" },
-            { id: 27, temp: 6, slug: "carta-27", name: "Desafio 27", image: "cartas/Final.VIRA_page-0027.jpg" },
-            { id: 28, temp: 6, slug: "carta-28", name: "Desafio 28", image: "cartas/Final.VIRA_page-0028.jpg" },
-            { id: 29, temp: 6, slug: "carta-29", name: "Desafio 29", image: "cartas/Final.VIRA_page-0029.jpg" },
-            { id: 30, temp: 6, slug: "carta-30", name: "Desafio 30", image: "cartas/Final.VIRA_page-0030.jpg" },
-            
-            // TEMPERATURA 7 (35 cartas - adiciona mais 5)
-            { id: 31, temp: 7, slug: "carta-31", name: "Desafio 31", image: "cartas/Final.VIRA_page-0031.jpg" },
-            { id: 32, temp: 7, slug: "carta-32", name: "Desafio 32", image: "cartas/Final.VIRA_page-0032.jpg" },
-            { id: 33, temp: 7, slug: "carta-33", name: "Desafio 33", image: "cartas/Final.VIRA_page-0033.jpg" },
-            { id: 34, temp: 7, slug: "carta-34", name: "Desafio 34", image: "cartas/Final.VIRA_page-0034.jpg" },
-            { id: 35, temp: 7, slug: "carta-35", name: "Desafio 35", image: "cartas/Final.VIRA_page-0035.jpg" },
-            
-            // TEMPERATURA 8 (40 cartas - adiciona mais 5)
-            { id: 36, temp: 8, slug: "carta-36", name: "Desafio 36", image: "cartas/Final.VIRA_page-0036.jpg" },
-            { id: 37, temp: 8, slug: "carta-37", name: "Desafio 37", image: "cartas/Final.VIRA_page-0037.jpg" },
-            { id: 38, temp: 8, slug: "carta-38", name: "Desafio 38", image: "cartas/Final.VIRA_page-0038.jpg" },
-            { id: 39, temp: 8, slug: "carta-39", name: "Desafio 39", image: "cartas/Final.VIRA_page-0039.jpg" },
-            { id: 40, temp: 8, slug: "carta-40", name: "Desafio 40", image: "cartas/Final.VIRA_page-0040.jpg" },
-            
-            // TEMPERATURA 9 (47 cartas - adiciona mais 7)
-            { id: 41, temp: 9, slug: "carta-41", name: "Desafio 41", image: "cartas/Final.VIRA_page-0041.jpg" },
-            { id: 42, temp: 9, slug: "carta-42", name: "Desafio 42", image: "cartas/Final.VIRA_page-0042.jpg" },
-            { id: 43, temp: 9, slug: "carta-43", name: "Desafio 43", image: "cartas/Final.VIRA_page-0043.jpg" },
-            { id: 44, temp: 9, slug: "carta-44", name: "Desafio 44", image: "cartas/Final.VIRA_page-0044.jpg" },
-            { id: 45, temp: 9, slug: "carta-45", name: "Desafio 45", image: "cartas/Final.VIRA_page-0045.jpg" },
-            { id: 46, temp: 9, slug: "carta-46", name: "Desafio 46", image: "cartas/Final.VIRA_page-0046.jpg" },
-            { id: 47, temp: 9, slug: "carta-47", name: "Desafio 47", image: "cartas/Final.VIRA_page-0047.jpg" },
-            
-            // TEMPERATURA 10 (54 cartas - adiciona mais 7)
-            { id: 48, temp: 10, slug: "carta-48", name: "Desafio 48", image: "cartas/Final.VIRA_page-0048.jpg" },
-            { id: 49, temp: 10, slug: "carta-49", name: "Desafio 49", image: "cartas/Final.VIRA_page-0049.jpg" },
-            { id: 50, temp: 10, slug: "carta-50", name: "Desafio 50", image: "cartas/Final.VIRA_page-0050.jpg" },
-            { id: 51, temp: 10, slug: "carta-51", name: "Desafio 51", image: "cartas/Final.VIRA_page-0051.jpg" },
-            { id: 52, temp: 10, slug: "carta-52", name: "Desafio 52", image: "cartas/Final.VIRA_page-0052.jpg" },
-            { id: 53, temp: 10, slug: "carta-53", name: "Desafio 53", image: "cartas/Final.VIRA_page-0053.jpg" },
-            { id: 54, temp: 10, slug: "carta-54", name: "Desafio 54", image: "cartas/Final.VIRA_page-0054.jpg" }
+            { "id": 1, "temp": 1, "slug": "carta-01", "name": "Desafio 1", "image": "cartas/Final.VIRA_page-0001.jpg" },
+            { "id": 2, "temp": 1, "slug": "carta-02", "name": "Desafio 2", "image": "cartas/Final.VIRA_page-0002.jpg" },
+            { "id": 3, "temp": 1, "slug": "carta-03", "name": "Desafio 3", "image": "cartas/Final.VIRA_page-0003.jpg" },
+            { "id": 4, "temp": 1, "slug": "carta-04", "name": "Desafio 4", "image": "cartas/Final.VIRA_page-0004.jpg" },
+            { "id": 5, "temp": 1, "slug": "carta-05", "name": "Desafio 5", "image": "cartas/Final.VIRA_page-0005.jpg" },
+            { "id": 6, "temp": 2, "slug": "carta-06", "name": "Desafio 6", "image": "cartas/Final.VIRA_page-0006.jpg" },
+            { "id": 7, "temp": 2, "slug": "carta-07", "name": "Desafio 7", "image": "cartas/Final.VIRA_page-0007.jpg" },
+            { "id": 8, "temp": 2, "slug": "carta-08", "name": "Desafio 8", "image": "cartas/Final.VIRA_page-0008.jpg" },
+            { "id": 9, "temp": 2, "slug": "carta-09", "name": "Desafio 9", "image": "cartas/Final.VIRA_page-0009.jpg" },
+            { "id": 10, "temp": 2, "slug": "carta-10", "name": "Desafio 10", "image": "cartas/Final.VIRA_page-0010.jpg" },
+            { "id": 11, "temp": 3, "slug": "carta-11", "name": "Desafio 11", "image": "cartas/Final.VIRA_page-0011.jpg" },
+            { "id": 12, "temp": 3, "slug": "carta-12", "name": "Desafio 12", "image": "cartas/Final.VIRA_page-0012.jpg" },
+            { "id": 13, "temp": 3, "slug": "carta-13", "name": "Desafio 13", "image": "cartas/Final.VIRA_page-0013.jpg" },
+            { "id": 14, "temp": 3, "slug": "carta-14", "name": "Desafio 14", "image": "cartas/Final.VIRA_page-0014.jpg" },
+            { "id": 15, "temp": 3, "slug": "carta-15", "name": "Desafio 15", "image": "cartas/Final.VIRA_page-0015.jpg" },
+            { "id": 16, "temp": 4, "slug": "carta-16", "name": "Desafio 16", "image": "cartas/Final.VIRA_page-0016.jpg" },
+            { "id": 17, "temp": 4, "slug": "carta-17", "name": "Desafio 17", "image": "cartas/Final.VIRA_page-0017.jpg" },
+            { "id": 18, "temp": 4, "slug": "carta-18", "name": "Desafio 18", "image": "cartas/Final.VIRA_page-0018.jpg" },
+            { "id": 19, "temp": 4, "slug": "carta-19", "name": "Desafio 19", "image": "cartas/Final.VIRA_page-0019.jpg" },
+            { "id": 20, "temp": 4, "slug": "carta-20", "name": "Desafio 20", "image": "cartas/Final.VIRA_page-0020.jpg" },
+            { "id": 21, "temp": 5, "slug": "carta-21", "name": "Desafio 21", "image": "cartas/Final.VIRA_page-0021.jpg" },
+            { "id": 22, "temp": 5, "slug": "carta-22", "name": "Desafio 22", "image": "cartas/Final.VIRA_page-0022.jpg" },
+            { "id": 23, "temp": 5, "slug": "carta-23", "name": "Desafio 23", "image": "cartas/Final.VIRA_page-0023.jpg" },
+            { "id": 24, "temp": 5, "slug": "carta-24", "name": "Desafio 24", "image": "cartas/Final.VIRA_page-0024.jpg" },
+            { "id": 25, "temp": 5, "slug": "carta-25", "name": "Desafio 25", "image": "cartas/Final.VIRA_page-0025.jpg" },
+            { "id": 26, "temp": 6, "slug": "carta-26", "name": "Desafio 26", "image": "cartas/Final.VIRA_page-0026.jpg" },
+            { "id": 27, "temp": 6, "slug": "carta-27", "name": "Desafio 27", "image": "cartas/Final.VIRA_page-0027.jpg" },
+            { "id": 28, "temp": 6, "slug": "carta-28", "name": "Desafio 28", "image": "cartas/Final.VIRA_page-0028.jpg" },
+            { "id": 29, "temp": 6, "slug": "carta-29", "name": "Desafio 29", "image": "cartas/Final.VIRA_page-0029.jpg" },
+            { "id": 30, "temp": 6, "slug": "carta-30", "name": "Desafio 30", "image": "cartas/Final.VIRA_page-0030.jpg" },
+            { "id": 31, "temp": 7, "slug": "carta-31", "name": "Desafio 31", "image": "cartas/Final.VIRA_page-0031.jpg" },
+            { "id": 32, "temp": 7, "slug": "carta-32", "name": "Desafio 32", "image": "cartas/Final.VIRA_page-0032.jpg" },
+            { "id": 33, "temp": 7, "slug": "carta-33", "name": "Desafio 33", "image": "cartas/Final.VIRA_page-0033.jpg" },
+            { "id": 34, "temp": 7, "slug": "carta-34", "name": "Desafio 34", "image": "cartas/Final.VIRA_page-0034.jpg" },
+            { "id": 35, "temp": 7, "slug": "carta-35", "name": "Desafio 35", "image": "cartas/Final.VIRA_page-0035.jpg" },
+            { "id": 36, "temp": 8, "slug": "carta-36", "name": "Desafio 36", "image": "cartas/Final.VIRA_page-0036.jpg" },
+            { "id": 37, "temp": 8, "slug": "carta-37", "name": "Desafio 37", "image": "cartas/Final.VIRA_page-0037.jpg" },
+            { "id": 38, "temp": 8, "slug": "carta-38", "name": "Desafio 38", "image": "cartas/Final.VIRA_page-0038.jpg" },
+            { "id": 39, "temp": 8, "slug": "carta-39", "name": "Desafio 39", "image": "cartas/Final.VIRA_page-0039.jpg" },
+            { "id": 40, "temp": 8, "slug": "carta-40", "name": "Desafio 40", "image": "cartas/Final.VIRA_page-0040.jpg" },
+            { "id": 41, "temp": 9, "slug": "carta-41", "name": "Desafio 41", "image": "cartas/Final.VIRA_page-0041.jpg" },
+            { "id": 42, "temp": 9, "slug": "carta-42", "name": "Desafio 42", "image": "cartas/Final.VIRA_page-0042.jpg" },
+            { "id": 43, "temp": 9, "slug": "carta-43", "name": "Desafio 43", "image": "cartas/Final.VIRA_page-0043.jpg" },
+            { "id": 44, "temp": 9, "slug": "carta-44", "name": "Desafio 44", "image": "cartas/Final.VIRA_page-0044.jpg" },
+            { "id": 45, "temp": 9, "slug": "carta-45", "name": "Desafio 45", "image": "cartas/Final.VIRA_page-0045.jpg" },
+            { "id": 46, "temp": 9, "slug": "carta-46", "name": "Desafio 46", "image": "cartas/Final.VIRA_page-0046.jpg" },
+            { "id": 47, "temp": 9, "slug": "carta-47", "name": "Desafio 47", "image": "cartas/Final.VIRA_page-0047.jpg" },
+            { "id": 48, "temp": 10, "slug": "carta-48", "name": "Desafio 48", "image": "cartas/Final.VIRA_page-0048.jpg" },
+            { "id": 49, "temp": 10, "slug": "carta-49", "name": "Desafio 49", "image": "cartas/Final.VIRA_page-0049.jpg" },
+            { "id": 50, "temp": 10, "slug": "carta-50", "name": "Desafio 50", "image": "cartas/Final.VIRA_page-0050.jpg" },
+            { "id": 51, "temp": 10, "slug": "carta-51", "name": "Desafio 51", "image": "cartas/Final.VIRA_page-0051.jpg" },
+            { "id": 52, "temp": 10, "slug": "carta-52", "name": "Desafio 52", "image": "cartas/Final.VIRA_page-0052.jpg" },
+            { "id": 53, "temp": 10, "slug": "carta-53", "name": "Desafio 53", "image": "cartas/Final.VIRA_page-0053.jpg" },
+            { "id": 54, "temp": 10, "slug": "carta-54", "name": "Desafio 54", "image": "cartas/Final.VIRA_page-0054.jpg" }
         ];
+
+        // async function loadCards() {
+        //    try {
+        //        const response = await fetch('cartas.json');
+        //        CARDS_CONFIG = await response.json();
+        //        initGame();
+        //    } catch (error) {
+        //        console.error("Erro ao carregar cartas.json:", error);
+        //        alert("Erro ao carregar as cartas do jogo. Verifique o console.");
+        //    }
+        // }
 
         let currentTemp = 1;
         let drawnCards = new Set();
 
-        // Inicializar termômetro
-        function initThermometer() {
-            const thermometer = document.getElementById('thermometer');
-            
-            for (let i = 1; i <= 10; i++) {
-                const level = document.createElement('div');
-                level.className = 'temp-level';
-                level.innerHTML = `<span>${i}</span>`;
-                
-                if (i === 1) {
-                    level.classList.add('active');
-                }
-                
-                level.addEventListener('click', () => setTemperature(i));
-                thermometer.appendChild(level);
-            }
-            
+        function initGame() {
+            initThermometer();
             updateTempInfo();
         }
 
-        // Definir temperatura
+        // Inicializar termômetro vertical (10 a 1)
+        function initThermometer() {
+            const thermometer = document.getElementById('thermometer');
+            thermometer.innerHTML = ''; // Limpar
+
+            // Loop normal 1 a 10, o CSS column-reverse cuida da ordem visual
+            for (let i = 1; i <= 10; i++) {
+                const level = document.createElement('div');
+                level.className = 'temp-level';
+                if (i === 1) level.classList.add('active');
+
+                level.innerHTML = `<span>${i}</span>`;
+                level.onclick = () => setTemperature(i);
+
+                thermometer.appendChild(level);
+            }
+        }
+
         function setTemperature(temp) {
             currentTemp = temp;
-            
+
+            // Atualizar visual do termômetro
             const levels = document.querySelectorAll('.temp-level');
             levels.forEach((level, index) => {
+                // index 0 é temp 1
                 if (index + 1 <= temp) {
                     level.classList.add('active');
                 } else {
                     level.classList.remove('active');
                 }
             });
-            
+
+            // Resetar cartas sorteadas ao mudar nível? 
+            // O comportamento original limpava. Vou manter.
             drawnCards.clear();
             updateTempInfo();
+
+            console.log(`[VIRA SYSTEM] Temperatura alterada para: ${temp}`);
         }
 
-        // Atualizar informações de temperatura
         function updateTempInfo() {
-            const availableCards = CARDS_CONFIG.filter(card => card.temp <= currentTemp);
-            document.getElementById('currentTemp').textContent = currentTemp;
-            document.getElementById('availableCards').textContent = availableCards.length;
+            const possible = CARDS_CONFIG.filter(c => c.temp <= currentTemp);
+            document.getElementById('currentTempDisplay').textContent = currentTemp;
+            document.getElementById('availableCards').textContent = possible.length;
         }
 
-        // Sortear carta
         function drawCard() {
-            const availableCards = CARDS_CONFIG.filter(card => 
-                card.temp <= currentTemp && !drawnCards.has(card.id)
-            );
-            
-            if (availableCards.length === 0) {
+            // Filtrar cartas da temperatura atual ou menor
+            const available = CARDS_CONFIG.filter(c => c.temp <= currentTemp);
+
+            // Filtrar as que já saíram
+            const notDrawn = available.filter(c => !drawnCards.has(c.id));
+
+            // Se todas já saíram, reseta o histórico (ou avisa, mas aqui vamos resetar silently para loop infinito)
+            if (notDrawn.length === 0 && available.length > 0) {
+                console.log("[VIRA SYSTEM] Todas as cartas deste nível já saíram. Resetando histórico.");
                 drawnCards.clear();
                 return drawCard();
             }
-            
-            const randomIndex = Math.floor(Math.random() * availableCards.length);
-            const drawnCard = availableCards[randomIndex];
-            
-            drawnCards.add(drawnCard.id);
-            return drawnCard;
+
+            if (available.length === 0) return null;
+
+            const randomIndex = Math.floor(Math.random() * notDrawn.length);
+            const selected = notDrawn[randomIndex];
+
+            drawnCards.add(selected.id);
+
+            // LOG SOLICITADO
+            console.log(`%c[VIRA CARD LOG] Carta Sorteada:`, "color: #a855f7; font-weight: bold; font-size: 12px");
+            console.log(`- ID: ${selected.id}`);
+            console.log(`- Nome: ${selected.name}`);
+            console.log(`- Slug: ${selected.slug}`);
+            console.log(`- Temp: ${selected.temp}`);
+            console.log(`- Imagem: ${selected.image}`);
+
+            return selected;
         }
 
-        // Exibir carta sorteada
         function displayCard(card) {
-            const cardWrapper = document.getElementById('cardWrapper');
-            const cardInfo = document.getElementById('cardInfo');
-            
-            cardWrapper.classList.add('flipping');
-            
+            const wrapper = document.getElementById('cardWrapper');
+            const meta = document.getElementById('cardMeta');
+
+            if (!card) return;
+
+            // Animação de saída/entrada
+            wrapper.classList.add('flipping');
+
             setTimeout(() => {
-                cardWrapper.innerHTML = `
+                wrapper.innerHTML = `
                     <div class="card">
-                        <img src="${card.image}" 
-                             alt="${card.name}"
-                             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22400%22%3E%3Crect fill=%22%23a855f7%22 width=%22300%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2224%22 fill=%22%23000%22 font-family=%22monospace%22%3E${card.name}%3C/text%3E%3C/svg%3E';">
+                        <img src="${card.image}" alt="${card.name}">
                     </div>
                 `;
-                
-                cardInfo.textContent = `${card.name} • Temp ${card.temp}`;
-                cardWrapper.classList.remove('flipping');
-            }, 150);
+
+                meta.style.display = 'block';
+                meta.textContent = `${card.slug} | ${card.name}`; // Debug visual discreto no canto
+
+                wrapper.classList.remove('flipping');
+            }, 300);
         }
 
-        // Event listener do botão de sortear
-        document.getElementById('drawButton').addEventListener('click', function() {
-            const button = this;
-            button.disabled = true;
-            
+        document.getElementById('drawButton').addEventListener('click', function () {
+            const btn = this;
+            btn.disabled = true;
+
+            // Pequeno delay para sensação tátil
             setTimeout(() => {
                 const card = drawCard();
-                displayCard(card);
-                button.disabled = false;
+                if (card) {
+                    displayCard(card);
+                }
+                btn.disabled = false;
             }, 200);
         });
 
-        // Inicializar jogo
-        initThermometer();
+        // Iniciar
+        // loadCards();
+        initGame();
+
     </script>
 </body>
+
 </html>
