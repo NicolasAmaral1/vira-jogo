@@ -19,6 +19,10 @@
         <button class="action-button close-btn" onclick="toggleModal()">
             Fechar
         </button>
+        <button class="action-button close-btn" onclick="logout()"
+            style="margin-top: 10px; border: 1px solid #ff4444; color: #ff4444; background: transparent;">
+            SAIR / LOGOUT
+        </button>
     </div>
 </div>
 
@@ -618,10 +622,98 @@
             }
         }
     </style>
+    <style>
+        /* AUTH STYLES */
+        .auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .auth-box {
+            background: #111;
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(168, 85, 247, 0.2);
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .auth-tab {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #666;
+            padding: 10px;
+            cursor: pointer;
+            font-family: 'Space Grotesk';
+            font-weight: bold;
+        }
+
+        .auth-tab.active {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .auth-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #222;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono';
+            /* Fixed typo */
+        }
+    </style>
 </head>
 
 <body>
-    <div class="main-layout">
+    <!-- AUTH OVERLAY -->
+    <div id="authOverlay" class="auth-overlay">
+        <div class="auth-box">
+            <h2 id="authTitle">ENTRAR</h2>
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchTab('login')">Login</button>
+                <button class="auth-tab" onclick="switchTab('register')">Cadastro</button>
+            </div>
+
+            <form id="authForm" onsubmit="handleAuth(event)">
+                <input type="text" id="nameInput" placeholder="Nome Completo" style="display: none;">
+                <input type="email" id="emailInput" placeholder="Email" required>
+                <input type="password" id="passwordInput" placeholder="Senha" required>
+                <input type="date" id="dobInput" style="display: none;">
+                <p id="dobLabel"
+                    style="display: none; font-size: 0.8rem; text-align: left; margin-top: -10px; margin-bottom: 10px; opacity: 0.7;">
+                    Data de Nascimento</p>
+
+                <button type="submit" class="action-button"
+                    style="background: var(--accent-color); color: #000; margin-top: 1rem;">
+                    <span id="authBtnText">ENTRAR</span>
+                </button>
+            </form>
+            <p id="authError" style="color: #ff4444; margin-top: 1rem; font-size: 0.9rem;"></p>
+        </div>
+    </div>
+
+    <!-- MAIN APP (Wrapped to be hidden/blurred) -->
+    <div id="appContainer" class="main-layout" style="filter: blur(5px); pointer-events: none;">
+
         <!-- BARRA LATERAL -->
         <aside class="sidebar">
             <header class="header">
@@ -661,6 +753,99 @@
     </div>
 
     <script>
+        // AUTH LOGIC
+        const API_URL = '/api'; // Proxied by Nginx
+        let isRegistering = false;
+
+        function checkSession() {
+            const token = localStorage.getItem('vira_token');
+            if (token) {
+                // Validate token (optional, or just assume valid until 401)
+                unlockGame();
+            }
+        }
+
+        function unlockGame() {
+            document.getElementById('authOverlay').style.display = 'none';
+            document.getElementById('appContainer').style.filter = 'none';
+            document.getElementById('appContainer').style.pointerEvents = 'all';
+        }
+
+        function switchTab(mode) {
+            isRegistering = mode === 'register';
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.getElementById('authTitle').textContent = isRegistering ? 'CADASTRO' : 'ENTRAR';
+            document.getElementById('authBtnText').textContent = isRegistering ? 'CADASTRAR' : 'ENTRAR';
+
+            // Toggle Fields
+            const display = isRegistering ? 'block' : 'none';
+            document.getElementById('nameInput').style.display = display;
+            document.getElementById('dobInput').style.display = display;
+            document.getElementById('dobLabel').style.display = display;
+            document.getElementById('nameInput').required = isRegistering;
+            document.getElementById('dobInput').required = isRegistering;
+
+            document.getElementById('authError').textContent = '';
+        }
+
+        async function handleAuth(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = 'Processando...';
+            document.getElementById('authError').textContent = '';
+
+            const email = document.getElementById('emailInput').value;
+            const password = document.getElementById('passwordInput').value;
+            const name = document.getElementById('nameInput').value;
+            const dob = document.getElementById('dobInput').value;
+
+            const endpoint = isRegistering ? '/register' : '/login';
+            const body = isRegistering
+                ? { email, password, name, birthDate: dob }
+                : { email, password };
+
+            try {
+                const res = await fetch(`${API_URL}${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.error || 'Erro desconhecido');
+                }
+
+                // Success
+                localStorage.setItem('vira_token', data.token);
+                localStorage.setItem('vira_user', JSON.stringify(data.user)); // Store minimal user data for UI if needed
+                unlockGame();
+                showToast(`Bem-vindo, ${data.user.name}!`);
+
+            } catch (err) {
+                document.getElementById('authError').textContent = err.message;
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        }
+
+        // Run Check
+        checkSession();
+
+        function logout() {
+            if (confirm("Tem certeza que deseja sair?")) {
+                localStorage.removeItem('vira_token');
+                localStorage.removeItem('vira_user');
+                location.reload();
+            }
+        }
+
         // DADOS DAS CARTAS (Incorporado para funcionar localmente sem servidor)
         const CARDS_CONFIG = [
             {

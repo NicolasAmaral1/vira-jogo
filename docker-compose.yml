@@ -13,6 +13,37 @@ services:
     networks:
       - vira-network
 
+  api:
+    build: ./api
+    container_name: vira-api
+    restart: unless-stopped
+    environment:
+      - DB_HOST=postgres
+      - DB_USER=postgres
+      - DB_NAME=vira_db
+      - DB_PASSWORD=vira_secret_pass
+      - JWT_SECRET=vira_super_secret_key_123
+    depends_on:
+      - postgres
+    networks:
+      - vira-network
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: vira-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=vira_secret_pass
+      - POSTGRES_DB=vira_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - vira-network
+
 networks:
   vira-network:
     driver: bridge
+
+volumes:
+  postgres_data:
