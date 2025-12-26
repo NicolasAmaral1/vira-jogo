@@ -461,6 +461,10 @@
             object-fit: contain;
             /* Garante que a carta inteira apareça */
             display: block;
+            pointer-events: none;
+            /* Desativa eventos de mouse na imagem */
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         .card-placeholder {
@@ -1296,7 +1300,7 @@
             setTimeout(() => {
                 wrapper.innerHTML = `
                     <div class="card">
-                        <img src="${card.image}" alt="${card.name}">
+                        <img src="${card.image}" alt="${card.name}" draggable="false" oncontextmenu="return false;">
                     </div>
                 `;
 
