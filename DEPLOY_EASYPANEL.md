@@ -10,7 +10,7 @@ Para colocar seu sistema no ar, você deve criar **3 serviços** dentro do mesmo
 
 ## 2. API (Backend)
 1.  Clique em **Add Service** -> **App**.
-2.  Dê o nome exato de: `api` (Importante para o site encontrar).
+2.  Dê o nome exato de: `vira-api` (Importante para o site encontrar).
 3.  **Source**: Selecione seu GitHub e este repositório.
 4.  **Build Settings**:
     - **Root Directory**: `./api` (Preste atenção nisso!)
@@ -41,4 +41,4 @@ Para colocar seu sistema no ar, você deve criar **3 serviços** dentro do mesmo
 - O **Nginx** (no site) pega essa chamada e manda para o serviço chamado `api`.
 - A **API** recebe, processa no **Postgres** e devolve a resposta.
 
-> **Nota**: Se o serviço da API não se chamar `api`, você precisará editar o arquivo `nginx.conf` no código e mudar a linha `proxy_pass http://api:3000/;` para `http://nome-que-voce-deu:3000/;`.
+> **Nota**: Se o serviço da API não se chamar `vira-api`, você precisará editar o arquivo `nginx.conf` no código e mudar a linha `proxy_pass http://vira-api:3000/;` para `http://nome-que-voce-deu:3000/;`.
