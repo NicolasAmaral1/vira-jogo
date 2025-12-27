@@ -680,6 +680,62 @@
             font-family: 'JetBrains Mono';
             /* Fixed typo */
         }
+
+        /* INFO MODAL & BUTTON STYLES */
+        .info-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 50%;
+            border: 1px solid var(--accent-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 20;
+            color: var(--accent-color);
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease;
+        }
+
+        .info-btn:active {
+            transform: scale(0.9);
+        }
+
+        .info-modal-content {
+            background: #111;
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--accent-color);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 50px rgba(168, 85, 247, 0.3);
+        }
+
+        .info-title {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk';
+            text-transform: uppercase;
+        }
+
+        .info-desc {
+            color: #ddd;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
     </style>
 </head>
 
@@ -708,6 +764,17 @@
                 </button>
             </form>
             <p id="authError" style="color: #ff4444; margin-top: 1rem; font-size: 0.9rem;"></p>
+        </div>
+    </div>
+
+    <!-- INFO MODAL -->
+    <div id="infoModal" class="auth-overlay" style="display: none; z-index: 10000;" onclick="closeInfoModal(event)">
+        <div class="info-modal-content" onclick="event.stopPropagation()">
+            <h2 id="infoTitle" class="info-title">NOME DA CARTA</h2>
+            <p id="infoDesc" class="info-desc">Descrição da carta aqui...</p>
+            <button class="action-button close-btn" onclick="toggleInfoModal()">
+                Fechar
+            </button>
         </div>
     </div>
 
@@ -853,6 +920,7 @@
                 "temp": 4,
                 "slug": "carta-01",
                 "name": "Batalha de Flexão",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0001.jpg"
             },
             {
@@ -860,6 +928,7 @@
                 "temp": 5,
                 "slug": "carta-02",
                 "name": "Troque de Roupa",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0002.jpg"
             },
             {
@@ -867,6 +936,7 @@
                 "temp": 6,
                 "slug": "carta-03",
                 "name": "Diga",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0003.jpg"
             },
             {
@@ -874,6 +944,7 @@
                 "temp": 7,
                 "slug": "carta-04",
                 "name": "Body Count",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0004.jpg"
             },
             {
@@ -881,6 +952,7 @@
                 "temp": 8,
                 "slug": "carta-05",
                 "name": "Beijo Vendado",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0005.jpg"
             },
             {
@@ -888,6 +960,7 @@
                 "temp": 9,
                 "slug": "carta-06",
                 "name": "Body Shot",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0006.jpg"
             },
             {
@@ -895,6 +968,7 @@
                 "temp": 10,
                 "slug": "carta-07",
                 "name": "Lapdance",
+                "description": "Faça um lapdance em uma pessoa que o grupo escolherá.",
                 "image": "cartas/Final.VIRA_page-0007.jpg"
             },
             {
@@ -902,6 +976,7 @@
                 "temp": 1,
                 "slug": "carta-08",
                 "name": "Crie uma Regra",
+                "description": "Crie uma regra que o grupo deve seguir durante o jogo.",
                 "image": "cartas/Final.VIRA_page-0008.jpg"
             },
             {
@@ -909,6 +984,7 @@
                 "temp": 1,
                 "slug": "carta-09",
                 "name": "Copo na Mão",
+                "description": "Quem tiver segurando um copo, vira!",
                 "image": "cartas/Final.VIRA_page-0009.jpg"
             },
             {
@@ -916,6 +992,7 @@
                 "temp": 1,
                 "slug": "carta-10",
                 "name": "Vira",
+                "description": "Vira!",
                 "image": "cartas/Final.VIRA_page-0010.jpg"
             },
             {
@@ -923,6 +1000,7 @@
                 "temp": 1,
                 "slug": "carta-11",
                 "name": "Vira 3",
+                "description": "Vira 3 vezes!",
                 "image": "cartas/Final.VIRA_page-0011.jpg"
             },
             {
@@ -930,6 +1008,7 @@
                 "temp": 1,
                 "slug": "carta-12",
                 "name": "Ligação",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0012.jpg"
             },
             {
@@ -937,6 +1016,7 @@
                 "temp": 1,
                 "slug": "carta-13",
                 "name": "Continência",
+                "description": "Continência!",
                 "image": "cartas/Final.VIRA_page-0013.jpg"
             },
             {
@@ -944,6 +1024,7 @@
                 "temp": 1,
                 "slug": "carta-14",
                 "name": "Embaralhe",
+                "description": "Embaralhe as pessoas!",
                 "image": "cartas/Final.VIRA_page-0014.jpg"
             },
             {
@@ -951,6 +1032,7 @@
                 "temp": 2,
                 "slug": "carta-15",
                 "name": "Jogo do Sério",
+                "description": "Olhe pra pessoa do seu lado, chegue bem perto. Quem sorrir ou mostrar os dentes, vira!",
                 "image": "cartas/Final.VIRA_page-0015.jpg"
             },
             {
@@ -958,6 +1040,7 @@
                 "temp": 3,
                 "slug": "carta-16",
                 "name": "Top 3",
+                "description": "Diga o nome e sobrenome dos seus 3 melhores beijos",
                 "image": "cartas/Final.VIRA_page-0016.jpg"
             },
             {
@@ -965,6 +1048,7 @@
                 "temp": 4,
                 "slug": "carta-17",
                 "name": "Stories",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0017.jpg"
             },
             {
@@ -972,6 +1056,7 @@
                 "temp": 5,
                 "slug": "carta-18",
                 "name": "Desafio",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0018.jpg"
             },
             {
@@ -979,6 +1064,7 @@
                 "temp": 6,
                 "slug": "carta-19",
                 "name": "Paranoia",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0019.jpg"
             },
             {
@@ -986,6 +1072,7 @@
                 "temp": 7,
                 "slug": "carta-20",
                 "name": "Marca de Batom",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0020.jpg"
             },
             {
@@ -993,6 +1080,7 @@
                 "temp": 1,
                 "slug": "carta-11",
                 "name": "Carta da Dupla",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0011.jpg"
             },
             {
@@ -1000,6 +1088,7 @@
                 "temp": 2,
                 "slug": "carta-12",
                 "name": "Make-up ou Tattoo",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0012.jpg"
             },
             {
@@ -1007,6 +1096,7 @@
                 "temp": 3,
                 "slug": "carta-13",
                 "name": "Passe o Gelo",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0013.jpg"
             },
             {
@@ -1014,6 +1104,7 @@
                 "temp": 4,
                 "slug": "carta-14",
                 "name": "Pênis Time",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0014.jpg"
             },
             {
@@ -1021,6 +1112,7 @@
                 "temp": 5,
                 "slug": "carta-15",
                 "name": "Quem é Mais Provável?",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0015.jpg"
             },
             {
@@ -1028,6 +1120,7 @@
                 "temp": 6,
                 "slug": "carta-16",
                 "name": "Eu Nunca",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0016.jpg"
             },
             {
@@ -1035,6 +1128,7 @@
                 "temp": 7,
                 "slug": "carta-17",
                 "name": "Massagem",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0017.jpg"
             },
             {
@@ -1042,6 +1136,7 @@
                 "temp": 8,
                 "slug": "carta-18",
                 "name": "7 Minutos no Céu",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0018.jpg"
             },
             {
@@ -1049,6 +1144,7 @@
                 "temp": 9,
                 "slug": "carta-19",
                 "name": "Cadeira",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0019.jpg"
             },
             {
@@ -1056,6 +1152,7 @@
                 "temp": 10,
                 "slug": "carta-20",
                 "name": "Parceiro",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0020.jpg"
             },
             {
@@ -1063,6 +1160,7 @@
                 "temp": 1,
                 "slug": "carta-21",
                 "name": "Vira 3",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0021.jpg"
             },
             {
@@ -1070,6 +1168,7 @@
                 "temp": 1,
                 "slug": "carta-22",
                 "name": "Ligação",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0022.jpg"
             },
             {
@@ -1077,6 +1176,7 @@
                 "temp": 1,
                 "slug": "carta-23",
                 "name": "Continência",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0023.jpg"
             },
             {
@@ -1084,6 +1184,7 @@
                 "temp": 1,
                 "slug": "carta-24",
                 "name": "Embaralhe",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0024.jpg"
             },
             {
@@ -1091,6 +1192,7 @@
                 "temp": 2,
                 "slug": "carta-25",
                 "name": "Jogo do Sério",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0025.jpg"
             },
             {
@@ -1098,6 +1200,7 @@
                 "temp": 3,
                 "slug": "carta-26",
                 "name": "Top 3",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0026.jpg"
             },
             {
@@ -1105,6 +1208,7 @@
                 "temp": 4,
                 "slug": "carta-27",
                 "name": "Stories",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0027.jpg"
             },
             {
@@ -1112,6 +1216,7 @@
                 "temp": 5,
                 "slug": "carta-28",
                 "name": "Desafio",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0028.jpg"
             },
             {
@@ -1119,6 +1224,7 @@
                 "temp": 6,
                 "slug": "carta-29",
                 "name": "Paranoia",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0029.jpg"
             },
             {
@@ -1126,6 +1232,7 @@
                 "temp": 7,
                 "slug": "carta-30",
                 "name": "Marca de Batom",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0030.jpg"
             },
             {
@@ -1133,6 +1240,7 @@
                 "temp": 8,
                 "slug": "carta-31",
                 "name": "Arrepio",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0031.jpg"
             },
             {
@@ -1140,6 +1248,7 @@
                 "temp": 9,
                 "slug": "carta-32",
                 "name": "Provocar",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0032.jpg"
             },
             {
@@ -1147,6 +1256,7 @@
                 "temp": 10,
                 "slug": "carta-33",
                 "name": "Tapa",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0033.jpg"
             },
             {
@@ -1154,6 +1264,7 @@
                 "temp": 1,
                 "slug": "carta-34",
                 "name": "Touch",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0034.jpg"
             },
             {
@@ -1161,6 +1272,7 @@
                 "temp": 1,
                 "slug": "carta-35",
                 "name": "Beijo",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0035.jpg"
             },
             {
@@ -1168,6 +1280,7 @@
                 "temp": 1,
                 "slug": "carta-36",
                 "name": "Vira!",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0036.jpg"
             },
             {
@@ -1175,6 +1288,7 @@
                 "temp": 1,
                 "slug": "carta-37",
                 "name": "Efeito Total",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0037.jpg"
             },
             {
@@ -1182,6 +1296,7 @@
                 "temp": 2,
                 "slug": "carta-38",
                 "name": "Buffalo Bill",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0038.jpg"
             },
             {
@@ -1189,6 +1304,7 @@
                 "temp": 3,
                 "slug": "carta-39",
                 "name": "Perfume",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0039.jpg"
             },
             {
@@ -1196,6 +1312,7 @@
                 "temp": 4,
                 "slug": "carta-40",
                 "name": "Segredos",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0040.jpg"
             },
             {
@@ -1203,6 +1320,7 @@
                 "temp": 5,
                 "slug": "carta-41",
                 "name": "Verdade",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0041.jpg"
             },
             {
@@ -1210,6 +1328,7 @@
                 "temp": 6,
                 "slug": "carta-42",
                 "name": "Vira!",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0042.jpg"
             },
             {
@@ -1217,6 +1336,7 @@
                 "temp": 7,
                 "slug": "carta-43",
                 "name": "Suck and Blow",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0043.jpg"
             },
             {
@@ -1224,6 +1344,7 @@
                 "temp": 8,
                 "slug": "carta-44",
                 "name": "Beijo Vendado",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0044.jpg"
             },
             {
@@ -1231,6 +1352,7 @@
                 "temp": 9,
                 "slug": "carta-45",
                 "name": "Vira!",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0045.jpg"
             },
             {
@@ -1238,6 +1360,7 @@
                 "temp": 10,
                 "slug": "carta-46",
                 "name": "Tire uma Peça de Roupa",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0046.jpg"
             },
             {
@@ -1245,6 +1368,7 @@
                 "temp": 1,
                 "slug": "carta-47",
                 "name": "Brinde",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0047.jpg"
             },
             {
@@ -1252,6 +1376,7 @@
                 "temp": 1,
                 "slug": "carta-48",
                 "name": "Carta do Dobro",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0048.jpg"
             },
             {
@@ -1259,6 +1384,7 @@
                 "temp": 2,
                 "slug": "carta-49",
                 "name": "Não",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0049.jpg"
             },
             {
@@ -1266,6 +1392,7 @@
                 "temp": 3,
                 "slug": "carta-50",
                 "name": "Qual a Probabilidade",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0050.jpg"
             },
             {
@@ -1273,6 +1400,7 @@
                 "temp": 1,
                 "slug": "carta-51",
                 "name": "Crie uma Regra",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0051.jpg"
             },
             {
@@ -1280,6 +1408,7 @@
                 "temp": 1,
                 "slug": "carta-52",
                 "name": "Lugar Inusitado",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0052.jpg"
             },
             {
@@ -1287,6 +1416,7 @@
                 "temp": 1,
                 "slug": "carta-53",
                 "name": "Joker",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0053.jpg"
             },
             {
@@ -1294,6 +1424,7 @@
                 "temp": 1,
                 "slug": "carta-54",
                 "name": "Joker",
+                "description": "Descrição em breve...",
                 "image": "cartas/Final.VIRA_page-0054.jpg"
             }
         ];
@@ -1342,6 +1473,29 @@
                 console.log("[VIRA SYSTEM] Modo Inteligente DESATIVADO.");
                 showToast("Modo Inteligente Desativado.");
             }
+        }
+
+        function toggleInfoModal() {
+            const modal = document.getElementById('infoModal');
+            if (modal.style.display === 'none') {
+                modal.style.display = 'flex';
+            } else {
+                modal.style.display = 'none';
+            }
+        }
+
+        function closeInfoModal(event) {
+            if (event.target.id === 'infoModal') {
+                toggleInfoModal();
+            }
+        }
+
+        function showCardInfo(id) {
+            const card = CARDS_CONFIG.find(c => c.id === id);
+            if (!card) return;
+            document.getElementById('infoTitle').textContent = card.name;
+            document.getElementById('infoDesc').textContent = card.description || "Descrição em breve...";
+            toggleInfoModal();
         }
 
         function showToast(msg) {
@@ -1485,6 +1639,7 @@
             setTimeout(() => {
                 wrapper.innerHTML = `
                     <div class="card">
+                        <div class="info-btn" onclick="showCardInfo(${card.id}); event.stopPropagation();">i</div>
                         <img src="${card.image}" alt="${card.name}" draggable="false" oncontextmenu="return false;">
                     </div>
                 `;
